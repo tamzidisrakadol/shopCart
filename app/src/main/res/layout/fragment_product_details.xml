@@ -1,14 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.ProductDetailsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="shopViewModel"
+            type="com.example.shoppingcart.viewModels.ShopViewModel" />
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".views.ProductDetailsFragment">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_12sdp">
+
+            <ImageView
+                android:id="@+id/productDetailImg"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_250sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/mobile"
+                android:scaleType="fitCenter"
+                android:productImg="@{shopViewModel.product.imgUrl}"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp" />
+
+            <TextView
+                android:id="@+id/productDetailNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{shopViewModel.product.name}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_4sdp" />
+
+            <TextView
+                android:id="@+id/productDetailPriceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{shopViewModel.product.price +` $`}"
+                android:textSize="@dimen/_16sdp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_4sdp" />
+
+            <TextView
+                android:id="@+id/productDetailAvailablityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{shopViewModel.product.available ? `Available` : `Out of stock`}"
+                android:textColor="@{shopViewModel.product.available ? @color/prime : @color/red }"
+                android:textSize="@dimen/_16sdp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_4sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_4sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/desc"
+                android:textSize="@dimen/_14sdp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_10sdp" />
+
+            <Button
+                android:id="@+id/productDetailCartBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add to Cart"
+                android:textColor="#3498E8"
+                android:enabled="@{shopViewModel.product.available}"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

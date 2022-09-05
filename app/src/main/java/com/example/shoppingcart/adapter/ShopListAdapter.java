@@ -15,11 +15,15 @@ import com.example.shoppingcart.models.Product;
 
 //instead of RecyclerView adapter extend ListAdapter for DiffUtilItemCallBack
 public class ShopListAdapter extends ListAdapter<Product, ShopListAdapter.ShopViewholder> {
+    ShopInterface shopInterface;
 
 
-    //remove all parameter from ShopListAdapter Constructor
-    public ShopListAdapter() {
-        super(Product.itemCallback);//set DiffUtil.ItemCallback() from Product Class in SuperClass Method
+    //remove all parameter from ShopListAdapter Constructor & pass shopInterface for itemClick
+    public ShopListAdapter(ShopInterface shopInterface) {
+        //set DiffUtil.ItemCallback() from Product Class in SuperClass Method
+        super(Product.itemCallback);
+        this.shopInterface=shopInterface;
+
     }
 
     @NonNull
@@ -27,6 +31,7 @@ public class ShopListAdapter extends ListAdapter<Product, ShopListAdapter.ShopVi
     public ShopViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ShopRowBinding shopRowBinding = ShopRowBinding.inflate(layoutInflater, parent, false);
+        shopRowBinding.setShopInterface(shopInterface);
         return new ShopViewholder(shopRowBinding);
     }
 
