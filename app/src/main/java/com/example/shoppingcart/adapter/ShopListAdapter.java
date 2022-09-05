@@ -13,37 +13,43 @@ import com.example.shoppingcart.R;
 import com.example.shoppingcart.databinding.ShopRowBinding;
 import com.example.shoppingcart.models.Product;
 
-public class ShopListAdapter extends ListAdapter<Product,ShopListAdapter.ShopViewholder> {
+//instead of RecyclerView adapter extend ListAdapter for DiffUtilItemCallBack
+public class ShopListAdapter extends ListAdapter<Product, ShopListAdapter.ShopViewholder> {
 
 
+    //remove all parameter from ShopListAdapter Constructor
     public ShopListAdapter() {
-        super(Product.itemCallback);
+        super(Product.itemCallback);//set DiffUtil.ItemCallback() from Product Class in SuperClass Method
     }
 
     @NonNull
-    @Override
+    @Override //inflate the row layout file
     public ShopViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ShopRowBinding shopRowBinding = ShopRowBinding.inflate(layoutInflater,parent,false);
+        ShopRowBinding shopRowBinding = ShopRowBinding.inflate(layoutInflater, parent, false);
         return new ShopViewholder(shopRowBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ShopViewholder holder, int position) {
-    Product product = getItem(position);
-    holder.shopRowBinding.setProduct(product);
+        Product product = getItem(position);
+        holder.shopRowBinding.setProduct(product);
     }
 
-    public class ShopViewholder extends RecyclerView.ViewHolder{
+    public class ShopViewholder extends RecyclerView.ViewHolder {
         ShopRowBinding shopRowBinding;
+
         public ShopViewholder(ShopRowBinding shopRowBinding) {
             super(shopRowBinding.getRoot());
-        this.shopRowBinding= shopRowBinding;
+            this.shopRowBinding = shopRowBinding;
         }
     }
 
-    public interface ShopInterface{
+
+    //set up onClick handling method
+    public interface ShopInterface {
         void addItem(Product product);
+
         void onItemClick(Product product);
     }
 }

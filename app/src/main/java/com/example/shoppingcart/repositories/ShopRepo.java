@@ -11,6 +11,9 @@ import java.util.UUID;
 
 public class ShopRepo {
     private MutableLiveData<List<Product>> mutableProductList;
+
+
+    //use this getProduct() in ViewModel to fetch all list of movies
     public LiveData<List<Product>> getProducts(){
         if (mutableProductList == null){
             mutableProductList = new MutableLiveData<>();
@@ -19,6 +22,8 @@ public class ShopRepo {
         return mutableProductList;
     }
 
+
+    //list of movies in loadData()
     private void loadData(){
         List<Product> productList = new ArrayList<>();
         productList.add(new Product(UUID.randomUUID().toString(),"Mobile phone","https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=367&q=80",890,true));

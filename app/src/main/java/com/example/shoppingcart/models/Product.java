@@ -71,6 +71,7 @@ public class Product {
         return getPrice() == product.getPrice() && isAvailable() == product.isAvailable() && getId().equals(product.getId()) && getName().equals(product.getName()) && getImgUrl().equals(product.getImgUrl());
     }
 
+    //using in ShopListAdapter
     public static DiffUtil.ItemCallback<Product> itemCallback = new DiffUtil.ItemCallback<Product>() {
         @Override
         public boolean areItemsTheSame(@NonNull Product oldItem, @NonNull Product newItem) {
@@ -83,7 +84,7 @@ public class Product {
         }
     };
 
-    @BindingAdapter("android:productImg")
+    @BindingAdapter("android:productImg") //set in row layout xml file
     public static void loadImage(ImageView imageView,String imgUrl){
         Picasso.get()
                 .load(imgUrl)
