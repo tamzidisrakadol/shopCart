@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        
         <variable
             name="shopViewModel"
             type="com.example.shoppingcart.viewModels.ShopViewModel" />
-
     </data>
 
     <ScrollView
@@ -98,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add to Cart"
+                android:onClick="@{() -> shopViewModel.addProductToCart(shopViewModel.product)}"
                 android:textColor="#3498E8"
                 android:enabled="@{shopViewModel.product.available}"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton" />

@@ -1,82 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+            <variable
+                name="cartItem"
+                type="com.example.shoppingcart.models.CartItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
-    <ImageView
-        android:id="@+id/cartProductImg"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/mobile" />
+        <ImageView
+            android:id="@+id/cartProductImg"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitCenter"
+            android:productImg="@{cartItem.product.imgUrl}"
+            app:srcCompat="@drawable/mobile" />
 
-    <TextView
-        android:id="@+id/cartProductNameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:text="Iphone 11"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="@dimen/_15sdp"
-        app:layout_constraintStart_toEndOf="@+id/cartProductImg"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/cartProductNameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:text="@{cartItem.product.name}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintStart_toEndOf="@+id/cartProductImg"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
-        android:text="Qty"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textSize="@dimen/_15sdp"
-        app:layout_constraintStart_toEndOf="@+id/cartProductImg"
-        app:layout_constraintTop_toBottomOf="@+id/cartProductNameTv" />
-
-
-    <Spinner
-        android:id="@+id/cartQuantitySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:entries="@array/quantity_array"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/cartProductNameTv" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:text="Qty"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintStart_toEndOf="@+id/cartProductImg"
+            app:layout_constraintTop_toBottomOf="@+id/cartProductNameTv" />
 
 
-    <ImageButton
-        android:id="@+id/cartDeleteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_baseline_delete_24"
-        app:layout_constraintStart_toEndOf="@+id/cartQuantitySpinner"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/cartProductPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="16dp"
-        android:text="$2000"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textSize="@dimen/_16sdp"
-        app:layout_constraintStart_toEndOf="@+id/cartProductNameTv"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Spinner
+            android:id="@+id/cartQuantitySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:entries="@array/quantity_array"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/cartProductNameTv"
+            android:setVal="@{cartItem.quantity}"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/cartDeleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_baseline_delete_24"
+            app:layout_constraintStart_toEndOf="@+id/cartQuantitySpinner"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/cartProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="68dp"
+            android:text="@{`$ `+String.valueOf(cartItem.product.price * cartItem.quantity)}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
