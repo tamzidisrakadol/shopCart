@@ -21,6 +21,7 @@ import com.example.shoppingcart.adapter.ShopListAdapter;
 import com.example.shoppingcart.databinding.FragmentShopBinding;
 import com.example.shoppingcart.models.Product;
 import com.example.shoppingcart.viewModels.ShopViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -64,12 +65,25 @@ public class ShopFragment extends Fragment implements ShopListAdapter.ShopInterf
         fragmentShopBinding = FragmentShopBinding.inflate(inflater,container,false);
         return fragmentShopBinding.getRoot();
     }
+
+    //item adding to cart
     @Override
     public void addItem(Product product) {
         boolean isAdded = shopViewModel.addProductToCart(product);
-        Log.d("tag","addItem" + product.getName() + isAdded);
+        if (isAdded){
+            Snackbar.make(requireView(),product.getName()+" added to cart",Snackbar.LENGTH_LONG)
+                    .setAction("Checkout", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            navController.navigate(R.id.action_shopFragment_to_cartFragment);
+                        }
+                    }).show();
+        }else{
+            Snackbar.make(requireView(),"Max quantity added",Snackbar.LENGTH_LONG).show();
+        }
     }
 
+    //List item click
     @Override
     public void onItemClick(Product product) {
         Log.d("tag","onItemClick : "+product.getName());

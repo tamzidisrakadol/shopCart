@@ -22,6 +22,7 @@ public class ShopViewModel extends ViewModel {
         return shopRepo.getProducts();
     }
 
+    //Product Detail
     public void setProduct(Product product){
         mutableProduct.setValue(product);
     }
@@ -30,6 +31,8 @@ public class ShopViewModel extends ViewModel {
         return mutableProduct;
     }
 
+
+    //cart
     public LiveData<List<CartItem>> getCart(){
         return cartRepo.getCart();
     }

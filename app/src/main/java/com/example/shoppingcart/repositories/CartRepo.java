@@ -18,6 +18,8 @@ public class CartRepo {
         }
         return mutableCartItem;
     }
+
+    //get item from Productlist and added to new list CartList
     public void initCart(){
         mutableCartItem.setValue(new ArrayList<CartItem>());
     }
@@ -27,6 +29,22 @@ public class CartRepo {
             initCart();
         }
         List<CartItem> cartItemsList = new ArrayList<>(mutableCartItem.getValue());
+
+        //to check same product is added or not , if added just rise the quantity
+        for(CartItem cartItem: cartItemsList){
+            if (cartItem.getProduct().getId().equals(product.getId())){
+                if (cartItem.getQuantity()==5){
+                    return false;
+                }
+                int index = cartItemsList.indexOf(cartItem);
+                cartItem.setQuantity(cartItem.getQuantity()+1);
+                cartItemsList.set(index,cartItem);
+                mutableCartItem.setValue(cartItemsList);
+                return true;
+
+            }
+        }
+
         CartItem cartItem = new CartItem(product,1);
         cartItemsList.add(cartItem);
         mutableCartItem.setValue(cartItemsList);
