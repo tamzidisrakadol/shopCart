@@ -50,7 +50,8 @@ public class CartItem {
         @Override
         public boolean areItemsTheSame(@NonNull CartItem oldItem, @NonNull CartItem newItem) {
             //checking the cart item product are same or not
-            return oldItem.getProduct().equals(newItem.getProduct());
+         //   return oldItem.getProduct().equals(newItem.getProduct());
+            return oldItem.getQuantity()== newItem.getQuantity();
         }
 
         @Override

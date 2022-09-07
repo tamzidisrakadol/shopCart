@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.shoppingcart.R;
 import com.example.shoppingcart.adapter.CartListAdapter;
+import com.example.shoppingcart.databinding.CartRowBinding;
 import com.example.shoppingcart.databinding.FragmentCartBinding;
 import com.example.shoppingcart.models.CartItem;
 import com.example.shoppingcart.viewModels.ShopViewModel;
@@ -22,9 +23,10 @@ import com.example.shoppingcart.viewModels.ShopViewModel;
 import java.util.List;
 
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartListAdapter.CartInterface{
 ShopViewModel shopViewModel;
 FragmentCartBinding fragmentCartBinding;
+
     public CartFragment() {
         // Required empty public constructor
     }
@@ -42,7 +44,7 @@ FragmentCartBinding fragmentCartBinding;
         super.onViewCreated(view, savedInstanceState);
 
         //add list to cart and decoration
-        CartListAdapter cartListAdapter = new CartListAdapter();
+        CartListAdapter cartListAdapter = new CartListAdapter(this);
         fragmentCartBinding.cartRecyclerView.setAdapter(cartListAdapter);
         fragmentCartBinding.cartRecyclerView.addItemDecoration(new DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL));
 
@@ -53,5 +55,15 @@ FragmentCartBinding fragmentCartBinding;
                 cartListAdapter.submitList(cartItems);
             }
         });
+    }
+
+    @Override
+    public void deleteItem(CartItem cartItem) {
+        shopViewModel.removeCartItem(cartItem);
+    }
+
+    @Override
+    public void updateQuantity(CartItem cartItem, int quantity) {
+        shopViewModel.changeQuantity(cartItem,quantity);
     }
 }

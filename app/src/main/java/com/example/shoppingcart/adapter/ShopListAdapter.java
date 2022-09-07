@@ -17,9 +17,9 @@ import com.example.shoppingcart.models.Product;
 public class ShopListAdapter extends ListAdapter<Product, ShopListAdapter.ShopViewholder> {
     ShopInterface shopInterface;
 
-
     //remove all parameter from ShopListAdapter Constructor & pass shopInterface for itemClick
     public ShopListAdapter(ShopInterface shopInterface) {
+
         //set DiffUtil.ItemCallback() from Product Class in SuperClass Method
         super(Product.itemCallback);
         this.shopInterface=shopInterface;
@@ -49,7 +49,6 @@ public class ShopListAdapter extends ListAdapter<Product, ShopListAdapter.ShopVi
             this.shopRowBinding = shopRowBinding;
         }
     }
-
 
     //set up onClick handling method
     public interface ShopInterface {

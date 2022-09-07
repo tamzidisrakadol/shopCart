@@ -22,11 +22,12 @@ public class ShopViewModel extends ViewModel {
         return shopRepo.getProducts();
     }
 
-    //Product Detail
+    //onitemclick setProduct
     public void setProduct(Product product){
         mutableProduct.setValue(product);
     }
 
+    //product detail
     public LiveData<Product> getProduct(){
         return mutableProduct;
     }
@@ -38,5 +39,15 @@ public class ShopViewModel extends ViewModel {
     }
     public boolean addProductToCart(Product product){
         return cartRepo.addItemToCart(product);
+    }
+
+    //remove item
+    public void removeCartItem(CartItem cartItem){
+        cartRepo.removeCartItem(cartItem);
+    }
+
+    //spinner quantity
+    public void changeQuantity(CartItem cartItem,int quantity){
+        cartRepo.changeQuantity(cartItem,quantity);
     }
 }

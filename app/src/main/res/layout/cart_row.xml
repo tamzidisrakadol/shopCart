@@ -7,6 +7,11 @@
             <variable
                 name="cartItem"
                 type="com.example.shoppingcart.models.CartItem" />
+
+            <variable
+                name="cartInterface"
+                type="com.example.shoppingcart.adapter.CartListAdapter.CartInterface" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,6 +76,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:minWidth="48dp"
             android:minHeight="48dp"
+            android:onClick="@{() ->cartInterface.deleteItem(cartItem)}"
             android:src="@drawable/ic_baseline_delete_24"
             app:layout_constraintStart_toEndOf="@+id/cartQuantitySpinner"
             app:layout_constraintTop_toTopOf="parent"

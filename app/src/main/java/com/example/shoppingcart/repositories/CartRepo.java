@@ -51,4 +51,31 @@ public class CartRepo {
         return true;
     }
 
+    //remove cart item
+    public void removeCartItem(CartItem cartItem){
+        if (mutableCartItem.getValue()==null){
+            return;
+        }
+
+        //first get the list of Product from cart
+        List<CartItem> cartItemList = new ArrayList<>(mutableCartItem.getValue());
+        //2nd remove the selected product from the cartlist
+        cartItemList.remove(cartItem);
+        //3rd set the new list to mutableLivedata
+        mutableCartItem.setValue(cartItemList);
+
+    }
+
+    //spinner in cart
+    public void changeQuantity(CartItem cartItem,int quantity){
+        if (mutableCartItem.getValue()==null){
+            return;
+        }
+        List<CartItem> cartItemList = new ArrayList<>(mutableCartItem.getValue());
+        CartItem updateCartItem = new CartItem(cartItem.getProduct(),quantity);
+        cartItemList.set(cartItemList.indexOf(cartItem),updateCartItem );
+        mutableCartItem.setValue(cartItemList);
+
+    }
+
 }
