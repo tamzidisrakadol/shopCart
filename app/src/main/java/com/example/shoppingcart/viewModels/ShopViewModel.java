@@ -50,4 +50,11 @@ public class ShopViewModel extends ViewModel {
     public void changeQuantity(CartItem cartItem,int quantity){
         cartRepo.changeQuantity(cartItem,quantity);
     }
+
+    //calculate total
+    public LiveData<Integer> getTotalPrice(){
+        return cartRepo.getTotalPrice();
+    }
+
+
 }

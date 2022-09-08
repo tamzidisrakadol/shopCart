@@ -55,6 +55,13 @@ FragmentCartBinding fragmentCartBinding;
                 cartListAdapter.submitList(cartItems);
             }
         });
+
+        shopViewModel.getTotalPrice().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                fragmentCartBinding.cartTotalBill.setText("Total: $"+integer.toString());
+            }
+        });
     }
 
     @Override

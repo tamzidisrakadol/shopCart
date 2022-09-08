@@ -11,6 +11,7 @@ import java.util.List;
 
 public class CartRepo {
     private MutableLiveData<List<CartItem>> mutableCartItem = new MutableLiveData<>();
+    private MutableLiveData<Integer> mutableTotalProduct =  new MutableLiveData<>();
 
     public LiveData<List<CartItem>> getCart(){
         if (mutableCartItem.getValue()== null){
@@ -22,6 +23,7 @@ public class CartRepo {
     //get item from Productlist and added to new list CartList
     public void initCart(){
         mutableCartItem.setValue(new ArrayList<CartItem>());
+        calculateCart();
     }
 
     public boolean addItemToCart(Product product){
@@ -48,7 +50,9 @@ public class CartRepo {
         CartItem cartItem = new CartItem(product,1);
         cartItemsList.add(cartItem);
         mutableCartItem.setValue(cartItemsList);
+        calculateCart();
         return true;
+
     }
 
     //remove cart item
@@ -63,7 +67,7 @@ public class CartRepo {
         cartItemList.remove(cartItem);
         //3rd set the new list to mutableLivedata
         mutableCartItem.setValue(cartItemList);
-
+    calculateCart();
     }
 
     //spinner in cart
@@ -75,7 +79,27 @@ public class CartRepo {
         CartItem updateCartItem = new CartItem(cartItem.getProduct(),quantity);
         cartItemList.set(cartItemList.indexOf(cartItem),updateCartItem );
         mutableCartItem.setValue(cartItemList);
-
+        calculateCart();
     }
+    //calculate total
+    public LiveData<Integer> getTotalPrice(){
+        if (mutableCartItem==null){
+            mutableTotalProduct.setValue(0);
+        }
+        return mutableTotalProduct;
+    }
+
+    private void calculateCart(){
+        if (mutableCartItem==null){
+            return;
+        }
+        int total = 0;
+        List<CartItem> cartItemsList = mutableCartItem.getValue();
+        for (CartItem cartItem:cartItemsList){
+            total += cartItem.getProduct().getPrice()*cartItem.getQuantity();
+        }
+        mutableTotalProduct.setValue(total);
+    }
+
 
 }
