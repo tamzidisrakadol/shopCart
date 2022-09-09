@@ -56,5 +56,10 @@ public class ShopViewModel extends ViewModel {
         return cartRepo.getTotalPrice();
     }
 
+    //reset cart
+    public void resetCart(){
+        cartRepo.initCart();
+    }
+
 
 }

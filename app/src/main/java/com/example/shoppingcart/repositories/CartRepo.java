@@ -81,7 +81,7 @@ public class CartRepo {
         mutableCartItem.setValue(cartItemList);
         calculateCart();
     }
-    //calculate total
+    //getcalculatetotal
     public LiveData<Integer> getTotalPrice(){
         if (mutableCartItem==null){
             mutableTotalProduct.setValue(0);
@@ -89,6 +89,7 @@ public class CartRepo {
         return mutableTotalProduct;
     }
 
+    //setCalculateTotal
     private void calculateCart(){
         if (mutableCartItem==null){
             return;
