@@ -6,6 +6,7 @@
     android:title="cartItem"
     android:icon="@drawable/cart2"
     app:showAsAction="always"
-    android:iconTint="@color/white"/>
+    android:iconTint="@color/white"
+    app:actionLayout="@layout/cart_action"/>
 
 </menu>
